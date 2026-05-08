@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- SLAM 建图（含 robot_description + depthimage_to_laserscan + RViz） -->
+    <include file="$(find nav_demo)/launch/nav01_slam.launch"/>
+
+    <!-- 导航规划（move_base） -->
+    <include file="$(find nav_demo)/launch/path.launch"/>
+
+</launch>

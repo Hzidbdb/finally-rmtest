@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mycar">
+    <!-- 摄像头参数 -->
+    <xacro:property name="camare_x" value="0.02" />
+    <xacro:property name="camare_y" value="0.05" />
+    <xacro:property name="camare_z" value="0.05" />
+    <xacro:property name="camare_mass" value="0.01" />
+
+    <xacro:property name="joint_camare_x" value="0.08" />
+    <xacro:property name="joint_camare_y" value="0" />
+    <xacro:property name="joint_camare_z" value="${base_length / 2 + camare_z / 2}" />
+
+    <!-- 连杆与关节 -->
+    <link name="camare">
+        <visual>
+            <geometry>
+                <box size="${camare_x} ${camare_y} ${camare_z}"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="black">
+                <color rgba="0 0 0 0.8" />
+            </material>
+        </visual>
+        <collision> 
+           <geometry>
+                <box size="${camare_x} ${camare_y} ${camare_z}"/>
+           </geometry>
+           <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </collision>
+      <xacro:box_inertial_matrix m="${camare_mass}" l="${camare_x}" w="${camare_y}" h="${camare_z}"/>
+    </link>
+   <gazebo reference="camare">
+        <material>Gazebo/Blue</material>
+   </gazebo>
+
+
+    <joint name="camare2base" type="fixed">
+        
+        <origin xyz="${joint_camare_x} ${joint_camare_y} ${joint_camare_z}" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="camare"/>
+        <axis xyz="0.0 0.0 0.0"/>
+        <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+    </joint>
+</robot>

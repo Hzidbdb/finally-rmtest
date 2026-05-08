@@ -1,0 +1,8 @@
+prefix=/home/garygoo/demo1/devel
+
+Name: urdf01_rivz
+Description: Description of urdf01_rivz
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,26 @@
+<launch>
+    <!-- 加载机器人模型 -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find urdf02)/urdf/car.urdf.xacro"/>
+
+    <!-- 深度图转激光 -->
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+        <remap from="image" to="/camera/depth/image_raw" />
+    </node>
+
+    <!-- 加载已有地图 -->
+    <include file="$(find nav_demo)/launch/nav03_map_serve.launch"/>
+
+    <!-- AMCL 定位 -->
+    <include file="$(find nav_demo)/launch/amcl.launch" />
+
+    <!-- move_base 路径规划 -->
+    <include file="$(find nav_demo)/launch/path.launch" />
+
+    <!-- TF 发布 -->
+    <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find nav_demo)/config/nav.rviz"/>
+
+</launch>

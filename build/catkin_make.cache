@@ -1,0 +1,2 @@
+nav_demo:urdf01_rivz:urdf02
+-DCATKIN_DEVEL_PREFIX=/home/garygoo/demo1/devel -DCMAKE_INSTALL_PREFIX=/home/garygoo/demo1/install -G Unix Makefiles

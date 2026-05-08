@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mycar">
+    <!-- 包括底盘，雷达，摄像头 -->
+    <xacro:include filename="xacro01.xacro" />
+    <xacro:include filename="xacro01_camare.xacro" />
+    <xacro:include filename="xacro01_leida.xacro" />
+    
+</robot>

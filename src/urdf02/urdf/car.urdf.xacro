@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mycar">
+    <!-- 包括底盘，雷达，摄像头 -->
+    <!-- 包含惯性矩阵 -->
+    <xacro:include filename="head.xacro" />
+
+    <xacro:include filename="xacro01.xacro" />
+    <xacro:include filename="xacro01_camare.xacro" />
+    <xacro:include filename="xacro01_leida.xacro" />
+    <!-- 运动控制 -->
+    <xacro:include filename="gazebo/move.xacro" />
+
+    <xacro:include filename="gazebo/leida.xacro" />
+    <xacro:include filename="gazebo/camera.xacro" />
+    <xacro:include filename="gazebo/kinect.xacro" />
+
+
+
+
+    
+</robot>

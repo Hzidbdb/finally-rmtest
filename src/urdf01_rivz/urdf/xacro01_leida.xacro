@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mycar">
+    <!-- 雷达支架 -->
+    <xacro:property name="suport_radius" value="0.01" />
+    <xacro:property name="suport_length" value="0.15" />
+
+    <!-- 雷达自身 -->
+    <xacro:property name="leida_radius" value="0.03" />
+    <xacro:property name="leida_length" value="0.05" />
+
+    <!-- 支架安装位置（在 base_link 顶部） -->
+    <xacro:property name="joint_suport_x" value="0" />
+    <xacro:property name="joint_suport_y" value="0" />
+    <!-- 支架底部在 base_link 顶部，所以中心在 base_length/2 + suport_length/2 -->
+    <xacro:property name="joint_suport_z" value="${base_length / 2 + suport_length / 2}" />
+
+    <!-- 雷达安装位置（在支架顶部） -->
+    <xacro:property name="joint_leida_x" value="0" />
+    <xacro:property name="joint_leida_y" value="0" />
+    <!-- 雷达底部在支架顶部，所以中心在 suport_length + leida_length/2 -->
+    <xacro:property name="joint_leida_z" value="${suport_length * 0.5+ leida_length / 2}" />
+    
+    <!-- 支架 -->
+    <link name="support">
+        <visual>
+            <geometry>
+                <cylinder radius="${suport_radius}" length="${suport_length}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="yellow">
+                <color rgba="0.8 0.5 0.0 0.5" />
+            </material>
+        </visual>
+    </link>
+    
+    <!-- 支架连接到 base_link -->
+    <joint name="support2base" type="fixed">
+        <parent link="base_link"/>
+        <child link="support"/>
+        <!-- 支架底部在 base_link 顶部，所以原点在支架中心位置 -->
+        <origin xyz="${joint_suport_x} ${joint_suport_y} ${joint_suport_z}" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    <!-- 雷达 -->
+    <link name="leida">
+        <visual>
+            <geometry>
+                <cylinder radius="${leida_radius}" length="${leida_length}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="black">
+                <color rgba="0 0 0.0 0.5" />
+            </material>
+        </visual>
+    </link>
+    
+    <!-- 雷达连接到支架顶部 -->
+    <joint name="leida2support" type="fixed">
+        <parent link="support"/>
+        <child link="leida"/>
+        <!-- 雷达底部在支架顶部，所以原点在雷达中心位置 -->
+        <origin xyz="${joint_leida_x} ${joint_leida_y} ${joint_leida_z}" rpy="0.0 0.0 0.0"/>
+    </joint>
+</robot>
