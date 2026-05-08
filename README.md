@@ -18,4 +18,4 @@ DLC内容：使用send_goal节点发布坐标使机器人自动去goal
 
 接着运行：rosrun nav_demo send_goal即可
 
-关注塔菲喵！！！
+
